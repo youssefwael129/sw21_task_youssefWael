@@ -1,0 +1,199 @@
+<!DOCTYPE html >
+
+<head>
+    <title>First task</title>
+    <meta charset="utf-8">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: sans-serif;
+            padding: 10px;
+            ;
+        }
+        /* Header/Blog Title */
+        
+        .header {
+            padding: 30px;
+            text-align: center;
+            ;
+        }
+        
+        .header h1 {
+            font-size: 60px;
+        }
+        /* Style the top navigation bar */
+        
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+        /* Style the topnav links */
+        
+        .topnav a {
+            float: left;
+            display: block;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        /* Change color on hover */
+        
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        /* Left column */
+        
+        .leftcolumn {
+            float: left;
+            width: 75%;
+        }
+        /* button */
+        
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            padding: 16px 32px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        /* list */
+        
+        li {
+            display: inline-block;
+            font-size: 1.5em;
+            list-style-type: none;
+            padding: 1em;
+            text-transform: uppercase;
+        }
+        /* span */
+        
+        li span {
+            display: block;
+            font-size: 4.5rem;
+        }
+        
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body id="body">
+    <!--Header-->
+    <div class="header">
+        <h1>STP</h1>
+        <p>It always seems impossible until it’s done.</p>
+        <div class="form">
+            <form>
+                <label for="color">Change text color </label><input id="label" name="textColor" type="color" required placeholder="red , blue....etc"></input>
+                <input id="color" type="button" value="Change Color" class="button" />
+            </form>
+        </div>
+    </div>
+    <!--nav-->
+    <div class="topnav">
+        <a href="http://stp-egypt.com/">Website</a>
+        <a href="https://www.facebook.com/STP.Organization/">Facebook</a>
+        <a href="http://instagram.com/STP_Egypt">Instgram</a>
+        <a href="https://www.youtube.com/user/STPchannel">Youtube</a>
+        <a href="https://www.google.com/+STPchannel">Google Plus</a>
+
+    </div>
+    <!--About STP-->
+    <div class="row">
+        <div class="leftcolumn">
+            <div>
+                <h2>Vision</h2>
+
+                <p>"Being a leading organization working on developing youth who will lead the positive change."</p>
+            </div>
+            <div>
+                <h2>Mission</h2>
+                <p>To develop youth in various fields personally and technically through academic programs, projects, and events in a values oriented system, to take our part in providing a generation capable of playing its roles effectively towards itself,
+                    community and country.</p>
+            </div>
+            <div>
+                <h2>Over view</h2>
+                <h3>Our purpose is to: </h3>
+                <div>Reduce the gap between work sector and academic studies.</div>
+                <div>Develop the society through the development of skills of young people and college students, especially engineering students, through a series of workshops.</div>
+                <div>Contribute in the development and the awakening of the community.</div>
+                <div>Convene and support a dynamic learning community.</div>
+            </div>
+            <div class="container">
+                <h2>Countdown</h2>
+                <form style="text-align:center ;">
+                    <label for="date">Start Countdown</label><input id="labelOne" name="Start Countdown" type="datetime-local" required placeholder="20/6/2001"></input>
+                    <label for="date">End Countdown</label><input id="labelTwo" name="End Countdown" type="datetime-local" required placeholder="20/6/2001"></input>
+                    <input id="btn1" type="button" value="start" class="button" />
+                </form>
+                <ul style="text-align: center;" id="CD">
+                    <li><span id="days"></span>days</li>
+                    <li><span id="hours"></span>Hours</li>
+                    <li><span id="minutes"></span>Minutes</li>
+                    <li><span id="seconds"></span>Seconds</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        /* An input field and a button, the user can enter a color name (ex: red,
+                                                                                                                                                                                                                    blue ..etc.) and when he/she presses the button all text in the page
+                                                                                                                                                                                                                    shall has that color.*/
+        var bodyElements = document.getElementById("body");
+        var formInput = document.getElementById("label");
+        var btn = document.getElementById("color");
+        console.log(btn)
+        btn.onclick = changeColor
+
+        function changeColor() {
+            var inputValue = formInput.value
+            console.log(inputValue)
+            bodyElements.style.color = inputValue
+        }
+        /* Two input fields with a countdown timer.*/
+        var formInputOne = document.getElementById("labelOne");
+        var formInputTwo = document.getElementById("labelTwo");
+        var btnOne = document.getElementById("btn1");
+        console.log(btnOne)
+
+        btnOne.onclick = getDateOne
+
+        function getDateOne() {
+            var inputValueOne = formInputOne.value
+            console.log(inputValueOne)
+            var inputValueTwo = formInputTwo.value
+            console.log(inputValueTwo)
+
+
+            const second = 1000,
+                minute = second * 60,
+                hour = minute * 60,
+                day = hour * 24;
+            let countDown = new Date(inputValueOne).getTime(),
+                countDownTwo = new Date(inputValueTwo).getTime(),
+                x = setInterval(
+                    function() {
+                        let distance = countDownTwo - countDown;
+                        document.getElementById('days').innerText = Math.floor(distance / (day)),
+                            document.getElementById('hours').innerText = Math.floor((distance % (day)) / (hour)),
+                            document.getElementById('minutes').innerText = Math.floor((distance % (hour)) / (minute)),
+                            document.getElementById('seconds').innerText = Math.floor((distance % (minute)) / second);
+
+
+
+                        if (distance < 0) {
+                            clearInterval(x);
+                            document.getElementById("CD").innerHTML = "EXPIRED";
+                        }
+                    },
+                    1000);
+        }
+    </script>
+</body>
